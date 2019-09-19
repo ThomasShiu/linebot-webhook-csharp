@@ -1,13 +1,13 @@
-# 20170317LineBotExample
-¦¹¬° 20170318 Visual Studio Everywhere °ª¶¯³õ¦¸ ¬ã°Q·| ¤§ LineBot ½d¨Ò
+# LineBotExample
+LineBot ç¯„ä¾‹
 
-### ¥]§t
-#### µo°e¤å¦r¡B¹Ï¤ù¡B¶K¹Ï°T®§
+### åŒ…å«
+#### ç™¼é€æ–‡å­—ã€åœ–ç‰‡ã€è²¼åœ–è¨Šæ¯
 #### WebHook
 #### LineNotify
 
-<br/>¬ÛÃö¨Ï¥Î»¡©ú½Ğ°Ñ¦ÒLineBot¨t¦C¤å³¹¡AIndex¦ì©ó:
-<br/>http://studyhost.blogspot.tw/2017/01/blog-post.html
+<br/>ç›¸é—œåƒè€ƒ:
+<br/>http://soldierzx0705.blogspot.com/2017/01/public-string-send-string-result-null.html
 
-<br/>¨Ï¥Î¦¹½d¨Ò½Ğ°È¥²°Ñ¦Ò¤W­z³sµ²¤¤ªºBlog¬ÛÃö¤å³¹
-<br/>¦Û¦æ¥Ó½ĞLineBot Account¨Ã´À´«µ{¦¡½X¤¤ªºToken»PUserId¡A¤~¯à¥¿½T°õ¦æ
+<br/>
+<br/>è‡ªè¡Œç”³è«‹LineBot Accountä¸¦æ›¿æ›web.config>appSettingsç¨‹å¼ç¢¼ä¸­çš„AccessTokenèˆ‡ChannelSecretï¼Œæ‰èƒ½æ­£ç¢ºåŸ·è¡Œ

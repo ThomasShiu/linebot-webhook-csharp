@@ -33,6 +33,7 @@ namespace WebApplication1.Controllers
                     Reply reply = new Reply(rb);
                     reply.send();
 
+
                 }
             }
             return Ok(data);
@@ -52,7 +53,9 @@ namespace WebApplication1.Controllers
                     sm.stickerId = m.stickerId;
                     break;
                 case MessageType.text:
-                    sm.text = m.text;
+
+                    sm.text = procMessageStr(m.text);
+                    
                     break;
                 default:
                     sm.type = Enum.GetName(typeof(MessageType), MessageType.text);
@@ -61,6 +64,27 @@ namespace WebApplication1.Controllers
             }
             msgs.Add(sm);
             return msgs;
+        }
+
+        private string procMessageStr(string m)
+        {
+            var replymess = m;
+
+            if (m.IndexOf("help") != -1)
+            {
+                replymess = "使用說明:\r\n輸入底下關鍵字即可顯示相關資訊\r\n" +
+                       "[? , help]: 使用說明，包含可用關鍵字等等資訊\r\n" +
+                       "[保養完成]:設定某機台保養完成。\r\n" +
+                       "[保養時間、預防保養]:查詢機台保養時間與項目。";
+            }
+            else if (m.IndexOf("設備保養") != -1)
+            {
+                replymess = "設備保養時間\r\n" +
+                       "每日\r\n" +
+                       "每周\r\n" +
+                       "每月";
+            }
+            return replymess;
         }
     }
 }
