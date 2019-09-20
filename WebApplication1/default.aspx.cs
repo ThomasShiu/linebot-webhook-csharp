@@ -9,52 +9,66 @@ namespace WebApplication1
 {
     public partial class _default : System.Web.UI.Page
     {
-        string ChannelAccessToken = "drZu92qiML7woRlX/TBs7fuLtmeEYUhV6Rqj7MJOMdrE6+nBSUCNd6fJj8Sh+QBjSHNj+e8Dn/Dtqw17a33GGTuPrEajqb3SjDB6A+qsqgXJBP6tFUa5+PDQLkRkQJjwBIuSuWUWa6IGm4SHBAUMmQdB04t89/1O/w1cDnyilFU=";
-        string UserID = "Ub37d9badcf110b80a809262cdb8cd946";
+       
+        isRock.LineBot.Bot bot = null;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //建立bot instance (需要channel access token)
+            bot = new isRock.LineBot.Bot(this.txb_Token.Text.Trim());
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void Button_SendText_Click(object sender, EventArgs e)
         {
+            //try
+            //{
+                //傳送純文字訊息
+                bot.PushMessage(this.txb_SendTo.Text.Trim(), this.txb_Msg.Text);
+            //}
+            //catch (Exception ex) {
+            //    Console.Write(ex.ToString());
+            //    throw ex;
+            //}
             
+        }
 
-            //bot.PushMessage(UserID, "Hi~你好");
-            isRock.LineBot.Utility.PushMessage(UserID, "Hi~你好", ChannelAccessToken);
-            isRock.LineBot.Utility.PushStickerMessage(UserID, 1, 1, ChannelAccessToken);
-            //push text
-            //bot.PushMessage(UserID, "test");
+        protected void Button_SendSticker_Click(object sender, EventArgs e)
+        {
+            //傳送貼圖訊息
+            bot.PushMessage(this.txb_SendTo.Text.Trim(), int.Parse(this.txb_PackageId.Text), int.Parse(this.txb_StickerId.Text));
+        }
 
-            //push sticker
-            //bot.PushMessage(UserID, 1, 2);
+        protected void Button_SendPicture_Click(object sender, EventArgs e)
+        {
+            //傳送圖片訊息
+            bot.PushMessage(this.txb_SendTo.Text.Trim(), new Uri(this.txb_PictureURL.Text.Trim()));
+        }
 
-            //push image
-            //bot.PushMessage(UserID, new Uri("https://arock.blob.core.windows.net/blogdata201612/22-124303-d8b2c4de-9a8c-48da-83f1-7c0d36de3ab6.png"));
+        protected void Button_SendButtonTemplate_Click(object sender, EventArgs e)
+        {
 
             //建立actions，作為ButtonTemplate的用戶回覆行為
-            //var actions = new List<isRock.LineBot.TemplateActionBase>();
-            //actions.Add(new isRock.LineBot.MessageActon()
-            //{ label = "點選這邊等同用戶直接輸入某訊息", text = "/例如這樣" });
-            //actions.Add(new isRock.LineBot.UriActon()
-            //{ label = "點這邊開啟網頁", uri = new Uri("http://www.google.com") });
-            //actions.Add(new isRock.LineBot.PostbackActon()
-            //{ label = "點這邊發生postack", data = "abc=aaa&def=111" });
+            var actions = new List<isRock.LineBot.TemplateActionBase>();
+            actions.Add(new isRock.LineBot.MessageAction()
+            { label = "點選這邊等同用戶直接輸入某訊息", text = "/例如這樣" });
+            actions.Add(new isRock.LineBot.UriAction()
+            { label = "點這邊開啟網頁", uri = new Uri("http://www.google.com") });
+            actions.Add(new isRock.LineBot.PostbackAction()
+            { label = "點這邊發生postack", data = "abc=aaa&def=111" });
 
-            ////單一Button Template Message
-            //var ButtonTemplate = new isRock.LineBot.ButtonsTemplate()
-            //{
-            //    altText = "替代文字(在無法顯示Button Template的時候顯示)",
-            //    text = "描述文字",
-            //    title = "標題",
-            //    //設定圖片
-            //    thumbnailImageUrl = new Uri("https://i.imgur.com/utrv8p1.png"),
-            //    actions = actions //設定回覆動作
-            //};
+            //單一Button Template Message
+            var ButtonTemplate = new isRock.LineBot.ButtonsTemplate()
+            {
+                altText = "替代文字(在無法顯示Button Template的時候顯示)",
+                text = txbButtonTemplateText.Text,
+                title = txbButtonTemplateTitle.Text,
+                //設定圖片
+                thumbnailImageUrl = new Uri("https://scontent-tpe1-1.xx.fbcdn.net/v/t31.0-8/15800635_1324407647598805_917901174271992826_o.jpg?oh=2fe14b080454b33be59cdfea8245406d&oe=591D5C94"),
+                actions = actions //設定回覆動作
+            };
 
             //發送
-            //bot.PushMessage(UserID, ButtonTemplate);
+            bot.PushMessage(this.txb_SendTo.Text.Trim(), ButtonTemplate);
         }
     }
 }
